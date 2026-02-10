@@ -11,9 +11,7 @@ function App() {
                     AI-Powered Customer Support System
                 </p>
 
-                <div className="rounded-xl border bg-card text-card-foreground shadow w-full h-[600px] flex items-center justify-center">
-                    <p className="text-muted-foreground">Chat Interface Coming Soon...</p>
-                </div>
+                <ChatInterface />
             </div>
         </div>
     )
