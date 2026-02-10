@@ -8,6 +8,13 @@
             "ES2019",
             "DOM"
         ],
-        "esModuleInterop": true
-    }
+        "esModuleInterop": true,
+        "outDir": "dist",
+        "declaration": true,
+        "noEmit": false
+    },
+    "include": [
+        "index.ts",
+        "prisma/**/*"
+    ]
 }
