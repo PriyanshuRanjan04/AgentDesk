@@ -25,7 +25,7 @@ app.post('/api/chat', async (c) => {
         const { messages } = await c.req.json();
 
         const result = await streamText({
-            model: openai('gpt-4-turbo'),
+            model: openai('gpt-4-turbo') as any,
             system: `You are AgentDesk, an intelligent customer support AI.
       
       You have access to specialized tools to help customers with their queries:
@@ -46,7 +46,7 @@ app.post('/api/chat', async (c) => {
                 getOrderDetails,
                 checkInvoiceStatus,
                 getReturnPolicy,
-            },
+            } as any,
             maxSteps: 5, // Allow multi-step tool calls
         });
 
