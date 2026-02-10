@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChatInterface } from '@/components/chat-interface'
 
 function App() {
     return (
