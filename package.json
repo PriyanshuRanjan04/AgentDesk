@@ -1,0 +1,22 @@
+{
+  "name": "agentdesk-monorepo",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "db:generate": "turbo run db:generate",
+    "db:push": "turbo run db:push",
+    "db:seed": "turbo run db:seed"
+  },
+  "devDependencies": {
+    "turbo": "^1.13.3",
+    "typescript": "^5.4.5",
+    "prettier": "^3.2.5"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}

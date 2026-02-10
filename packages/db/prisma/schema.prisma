@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id @default(uuid())
+  email         String         @unique
+  name          String?
+  role          UserRole       @default(CUSTOMER)
+  conversations Conversation[]
+  orders        Order[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model Conversation {
+  id        String    @id @default(uuid())
+  userId    String?
+  user      User?     @relation(fields: [userId], references: [id])
+  messages  Message[]
+  title     String?
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Message {
+  id             String       @id @default(uuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  role           MessageRole
+  content        String
+  createdAt      DateTime     @default(now())
+}
+
+// Mock Data Models for Agents
+
+model Order {
+  id          String      @id @default(uuid())
+  orderNumber String      @unique
+  userId      String
+  user        User        @relation(fields: [userId], references: [id])
+  status      OrderStatus
+  total       Float
+  items       Json // Simplified for mock: [{ name: "Item A", price: 10 }]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  details     String? // Extra details for the agent to read
+}
+
+model Invoice {
+  id          String        @id @default(uuid())
+  invoiceNumber String      @unique
+  amount        Float
+  status        InvoiceStatus
+  dueDate       DateTime
+  items         Json
+  createdAt     DateTime    @default(now())
+}
+
+enum UserRole {
+  CUSTOMER
+  ADMIN
+}
+
+enum MessageRole {
+  user
+  assistant
+  system
+  data // For tool outputs
+}
+
+enum OrderStatus {
+  PENDING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  RETURNED
+}
+
+enum InvoiceStatus {
+  PAID
+  UNPAID
+  OVERDUE
+}

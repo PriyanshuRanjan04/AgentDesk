@@ -82,6 +82,21 @@
    npm run dev
    ```
 
+### Environment Variables
+Create a `.env` file in the root directory (or in `apps/api` for backend-specific keys).
+
+```ini
+# Database (required for Prisma)
+DATABASE_URL="postgresql://user:password@localhost:5432/agentdesk"
+
+# AI Provider (Required)
+# Get this from https://platform.openai.com/
+OPENAI_API_KEY="sk-..."
+
+# Optional: For specialized tools if implemented
+# TAVILY_API_KEY="..." 
+```
+
 ## 📜 License
 
 MIT
