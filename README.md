@@ -18,20 +18,30 @@
 
 ## 🛠️ Tech Stack
 
-**Backend**
-- [Hono.dev](https://hono.dev) - Ultrafast web framework
-- [PostgreSQL](https://www.postgresql.org/) - Relational database
-- [Prisma](https://www.prisma.io/) - Next-generation ORM
-- [Vercel AI SDK](https://sdk.vercel.ai/docs) - AI integration
+| Component | Technology | Description |
+|-----------|------------|-------------|
+| **Frontend** | React / Vite | Basic UI with TailwindCSS |
+| **Backend** | Hono.dev | Ultra-fast Node.js framework |
+| **Database** | PostgreSQL | Relational database |
+| **ORM** | Prisma | Type-safe database client |
+| **AI** | Vercel AI SDK | AI model integration and streaming |
 
-**Frontend**
-- [React](https://react.dev/) - UI Library
-- [Vite](https://vitejs.dev/) - Build tool
-- [TailwindCSS](https://tailwindcss.com/) - Utility-first CSS
-- [TanStack Query](https://tanstack.com/query/latest) - Async state management
+## 🔌 API Routes
 
-**Monorepo**
-- [TurboRepo](https://turbo.build/) - High-performance build system
+```
+/api
+├── /chat
+│   ├── POST /messages                 # Send new message
+│   ├── GET /conversations/:id         # Get conversation history
+│   ├── GET /conversations             # List user conversations
+│   └── DELETE /conversations/:id      # Delete conversation
+│
+├── /agents
+│   ├── GET /agents                    # List available agents
+│   └── GET /agents/:type/capabilities # Get agent capabilities
+│
+└── /health                            # Health check
+```
 
 ## 📂 Project Structure
 
