@@ -1,0 +1,11 @@
+{
+    "buildCommand": "cd ../.. && npx turbo run build --filter=web...",
+    "outputDirectory": "dist",
+    "framework": "vite",
+    "rewrites": [
+        {
+            "source": "/api/:match*",
+            "destination": "https://api-agentdesk.vercel.app/api/:match*"
+        }
+    ]
+}

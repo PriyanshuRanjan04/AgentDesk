@@ -7,7 +7,9 @@
         "lib": [
             "ES2019"
         ],
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "outDir": "dist",
+        "noEmit": false
     },
     "include": [
         "src/**/*"
