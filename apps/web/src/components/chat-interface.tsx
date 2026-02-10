@@ -10,6 +10,10 @@ import { Send, Bot, User } from 'lucide-react';
 export function ChatInterface() {
     const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
         api: '/api/chat',
+        onError: (error) => {
+            console.error("Chat Error:", error);
+            alert("Chat Error: " + error.message);
+        }
     });
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
