@@ -56,7 +56,9 @@ export const checkInvoiceStatus = tool({
 // Tool for return policy (Static Knowledge Base)
 export const getReturnPolicy = tool({
     description: 'Get the return policy information.',
-    parameters: z.object({}),
+    parameters: z.object({
+        query: z.string().optional().describe('Optional context for the return policy query'),
+    }),
     execute: async () => {
         return {
             policy: "Items can be returned within 30 days of delivery. They must be in original condition. Shipping fees are non-refundable unless the item is defective.",
