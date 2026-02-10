@@ -10,7 +10,6 @@ import { Send, Bot, User } from 'lucide-react';
 export function ChatInterface() {
     const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
         api: '/api/chat',
-        keepLastMessageOnError: true,
     });
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -46,8 +45,8 @@ export function ChatInterface() {
                                 {m.role === 'user' ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
                             </div>
                             <div className={`p-3 rounded-lg text-sm ${m.role === 'user'
-                                    ? 'bg-primary text-primary-foreground'
-                                    : 'bg-muted text-foreground'
+                                ? 'bg-primary text-primary-foreground'
+                                : 'bg-muted text-foreground'
                                 }`}>
                                 {m.content}
                             </div>
