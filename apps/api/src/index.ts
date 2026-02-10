@@ -51,9 +51,9 @@ app.post('/api/chat', async (c) => {
         });
 
         return result.toDataStreamResponse();
-    } catch (error) {
+    } catch (error: any) {
         console.error('Error in chat endpoint:', error);
-        return c.json({ error: 'Internal Server Error' }, 500);
+        return c.json({ error: error.message || 'Internal Server Error', stack: error.stack }, 500);
     }
 });
 
