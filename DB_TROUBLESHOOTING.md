@@ -25,6 +25,12 @@ Go to **Settings > Database > Connection Pooling** and copy the string. It usual
 DATABASE_URL="postgres://postgres.dwijmxwibwzdnuqtgrft:[YOUR-PASSWORD]@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?pgbouncer=true"
 ```
 
+> [!CAUTION]
+> **COMMON MISTAKE:**
+> The string from Supabase contains `[YOUR-PASSWORD]` as a placeholder.
+> You **MUST** replace `[YOUR-PASSWORD]` with your **actual database password**.
+> If your password has special characters (like `$`, `#`, `@`), you might need to URL-encode them (e.g., `$` becomes `%24`), though usually putting the password as-is works if it's in quotes.
+
 > [!IMPORTANT]
 > **If you deployed to Vercel/Render:**
 > changing the local `.env` file **DOES NOT** update the server.
