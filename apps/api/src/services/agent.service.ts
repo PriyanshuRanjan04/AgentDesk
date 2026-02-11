@@ -62,7 +62,7 @@ export class AgentService {
         };
 
         const result = await streamText({
-            model: openai('gpt-4-turbo') as any,
+            model: openai('gpt-4o') as any,
             system: `You are AgentDesk, an intelligent customer support system.
             
             You have access to specialized agents and tools:
