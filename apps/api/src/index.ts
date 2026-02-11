@@ -16,6 +16,10 @@ app.use('*', cors())
 // Routes
 app.post('/api/chat', ChatController.handleChat);
 
+app.get('/', (c) => {
+    return c.text('AgentDesk API is running!')
+})
+
 app.get('/health', (c) => {
     return c.json({ status: 'healthy', timestamp: new Date().toISOString() })
 })

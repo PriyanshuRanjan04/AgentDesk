@@ -36,3 +36,14 @@ This document tracks the technical challenges encountered during the setup and d
 
 ## 5. Deployment Configuration
 - **Monorepo Structure**: Needed to configure `render.yaml` and `vercel.json` carefully to handle the monorepo structure (building dependencies like `@agentdesk/db` before the app).
+
+## 6. Production Deployment (Render)
+- **Port Binding Timeout**: Deployment failed with "Port binding timeout".
+  - *Cause*: API was hardcoded to listen on port 3000, but Render assigns a dynamic port via `PORT` env var.
+  - *Fix*: Updated `index.ts` to use `process.env.PORT || 3000`.
+- **Database Connection**: `PrismaClientInitializationError: Can't reach database server`.
+  - *Cause*: IPv6 resolution issues and Password Special Characters.
+  - *Fix*: Switched to Supabase Connection Pooler (IPv4) and URL-encoded the password in `DATABASE_URL`.
+- **Root 404**: Application returned 404 on `/`.
+  - *Cause*: No root route defined.
+  - *Fix*: Added `app.get('/')` to return a status message.
