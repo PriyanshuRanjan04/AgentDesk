@@ -20,7 +20,7 @@ app.get('/health', (c) => {
     return c.json({ status: 'healthy', timestamp: new Date().toISOString() })
 })
 
-const port = 3000
+const port = Number(process.env.PORT || 3000)
 console.log(`Server is running on port ${port}`)
 
 serve({
