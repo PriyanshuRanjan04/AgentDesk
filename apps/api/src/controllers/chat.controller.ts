@@ -7,9 +7,23 @@ export class ChatController {
         try {
             const { messages, conversationId } = await c.req.json();
 
+            // Sanitize messages to remove tool invocations without results
+            // This prevents crashes if the frontend sends a pending/incomplete tool state
+            const sanitizedMessages = messages.map((m: any) => {
+                if (m.toolInvocations) {
+                    return {
+                        ...m,
+                        toolInvocations: m.toolInvocations.filter((ti: any) =>
+                            ti.result !== undefined && ti.result !== null
+                        )
+                    };
+                }
+                return m;
+            });
+
             // Delegate to AgentService
             const result = await AgentService.processChat({
-                messages: convertToCoreMessages(messages),
+                messages: convertToCoreMessages(sanitizedMessages),
                 conversationId,
             });
 
