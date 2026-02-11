@@ -1,12 +1,13 @@
 import { streamText, CoreMessage, tool } from 'ai';
-import { createGroq } from '@ai-sdk/groq';
+import { createOpenAI } from '@ai-sdk/openai';
 import prisma from '@agentdesk/db';
 import { z } from 'zod';
 import { OrderAgent } from '../agents/order.agent';
 import { BillingAgent } from '../agents/billing.agent';
 import { SupportAgent } from '../agents/support.agent';
 
-const groq = createGroq({
+const groq = createOpenAI({
+    baseURL: 'https://api.groq.com/openai/v1',
     apiKey: process.env.GROQ_API_KEY,
 });
 
