@@ -9,6 +9,7 @@ import { SupportAgent } from '../agents/support.agent';
 const groq = createOpenAI({
     baseURL: 'https://api.groq.com/openai/v1',
     apiKey: process.env.GROQ_API_KEY,
+    compatibility: 'strict',
 });
 
 export class AgentService {
