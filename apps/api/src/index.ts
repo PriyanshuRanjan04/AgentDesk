@@ -6,7 +6,15 @@ import { config } from 'dotenv'
 import { ChatController } from './controllers/chat.controller'
 
 // Load environment variables
-config();
+config(); // Load from .env in current dir
+config({ path: '../../.env' }); // Load from root .env
+
+// Verify critical environment variables
+if (!process.env.GROQ_API_KEY) {
+    console.error('CRITICAL: GROQ_API_KEY is missing from environment variables!');
+} else {
+    console.log('GROQ_API_KEY loaded successfully.');
+}
 
 const app = new Hono()
 
