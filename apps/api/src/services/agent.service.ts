@@ -6,7 +6,7 @@ import { OrderAgent } from '../agents/order.agent';
 import { BillingAgent } from '../agents/billing.agent';
 import { SupportAgent } from '../agents/support.agent';
 
-const groq = createOpenAI({
+const getGroq = () => createOpenAI({
     baseURL: 'https://api.groq.com/openai/v1',
     apiKey: process.env.GROQ_API_KEY,
     compatibility: 'strict',
@@ -64,7 +64,7 @@ export class AgentService {
         };
 
         const result = await streamText({
-            model: groq('llama-3.3-70b-versatile') as any,
+            model: getGroq()('llama-3.3-70b-versatile') as any,
             system: `You are AgentDesk, an intelligent customer support system.
             
             You have access to specialized agents and tools:
