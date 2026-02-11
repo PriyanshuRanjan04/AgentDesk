@@ -10,12 +10,21 @@ export class ChatController {
             // Sanitize messages to remove tool invocations without results
             // This prevents crashes if the frontend sends a pending/incomplete tool state
             const sanitizedMessages = messages.map((m: any) => {
-                if (m.toolInvocations) {
+                if (m.toolInvocations && Array.isArray(m.toolInvocations)) {
+                    // Filter to keep only tool invocations with results
+                    const validToolInvocations = m.toolInvocations.filter((ti: any) =>
+                        ti.result !== undefined && ti.result !== null
+                    );
+
+                    // If no valid tool invocations remain, remove the property entirely
+                    if (validToolInvocations.length === 0) {
+                        const { toolInvocations, ...rest } = m;
+                        return rest;
+                    }
+
                     return {
                         ...m,
-                        toolInvocations: m.toolInvocations.filter((ti: any) =>
-                            ti.result !== undefined && ti.result !== null
-                        )
+                        toolInvocations: validToolInvocations
                     };
                 }
                 return m;
