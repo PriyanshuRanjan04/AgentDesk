@@ -1,13 +1,13 @@
 import { streamText, CoreMessage, tool } from 'ai';
-import { createOpenAI } from '@ai-sdk/openai';
+import { createGroq } from '@ai-sdk/groq';
 import prisma from '@agentdesk/db';
 import { z } from 'zod';
 import { OrderAgent } from '../agents/order.agent';
 import { BillingAgent } from '../agents/billing.agent';
 import { SupportAgent } from '../agents/support.agent';
 
-const openai = createOpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
+const groq = createGroq({
+    apiKey: process.env.GROQ_API_KEY,
 });
 
 export class AgentService {
@@ -62,7 +62,7 @@ export class AgentService {
         };
 
         const result = await streamText({
-            model: openai('gpt-3.5-turbo') as any,
+            model: groq('llama-3.3-70b-versatile') as any,
             system: `You are AgentDesk, an intelligent customer support system.
             
             You have access to specialized agents and tools:
