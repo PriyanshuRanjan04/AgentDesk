@@ -44,6 +44,6 @@ This document tracks the technical challenges encountered during the setup and d
 - **Database Connection**: `PrismaClientInitializationError: Can't reach database server`.
   - *Cause*: IPv6 resolution issues and Password Special Characters.
   - *Fix*: Switched to Supabase Connection Pooler (IPv4) and URL-encoded the password in `DATABASE_URL`.
-- **Root 404**: Application returned 404 on `/`.
-  - *Cause*: No root route defined.
-  - *Fix*: Added `app.get('/')` to return a status message.
+- **Root 404 / Timeout**: Application returned 404 on `/` or timed out during health check.
+  - *Cause*: No root route defined and Render health check defaults to `/`.
+  - *Fix*: Added `app.get('/')` to return a 200 OK status message. Verified with `HEAD / 200` log.
