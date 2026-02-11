@@ -4,12 +4,30 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from './ui/scroll-area';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Send, Bot, User } from 'lucide-react';
 
 export function ChatInterface() {
+    const [conversationId, setConversationId] = useState<string>("");
+
+    useEffect(() => {
+        // Simple ID generation or retrieval from storage could go here.
+        // For now, we rely on the backend to create one if missing, 
+        // BUT we need to track it if we want to continue the same conversation.
+        // Let's generate a UUID on client side for this demo.
+        const storedId = localStorage.getItem("agentdesk_conversation_id");
+        if (storedId) {
+            setConversationId(storedId);
+        } else {
+            const newId = crypto.randomUUID();
+            setConversationId(newId);
+            localStorage.setItem("agentdesk_conversation_id", newId);
+        }
+    }, []);
+
     const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
         api: '/api/chat',
+        body: { conversationId },
         onError: (error) => {
             console.error("Chat Error:", error);
             alert("Chat Error: " + error.message);

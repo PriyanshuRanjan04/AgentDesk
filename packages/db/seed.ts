@@ -78,7 +78,7 @@ async function main() {
             messages: {
                 create: [
                     { role: "user", content: "Hi, when will my headphones arrive?" },
-                    { role: "assistant", content: "Hi Alice! I see your order ORD-123456 containing Wireless Headphones has been shipped. It should arrive by Friday." },
+                    { role: "assistant", content: "Hi Alice! I see your order ORD-123456 containing Wireless Headphones has been shipped. It should arrive by Friday.", agentId: "SupportAgent" },
                 ],
             },
         },
