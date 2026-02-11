@@ -19,7 +19,22 @@ export class AgentService {
         // We will persist the conversation if a conversationId is provided or create a new one.
         let currentConversationId = conversationId;
 
-        if (!currentConversationId) {
+        if (currentConversationId) {
+            // Verify if conversation exists
+            const conversation = await prisma.conversation.findUnique({
+                where: { id: currentConversationId }
+            });
+
+            if (!conversation) {
+                // If ID provided but not found, create it (syncing with frontend ID)
+                await prisma.conversation.create({
+                    data: {
+                        id: currentConversationId,
+                        title: 'New Conversation'
+                    }
+                });
+            }
+        } else {
             // Create new conversation
             const convo = await prisma.conversation.create({
                 data: { title: 'New Conversation' }
